@@ -1,5 +1,7 @@
 <form name="newProductForm" class="product-form" ng-submit="createProduct(newProductForm)" ng-show="showCreateProduct">
-	<input type="text" placeholder="Product Name" ng-model="newProduct.title" required /><span ng-show="creatingNewProduct">Creating...</span><br/>
+	<input type="text" placeholder="Product Name" ng-model="newProduct.title" required />
+	<span ng-show="creatingNewProduct">Creating...</span>
+	<br/>
 	<input type="text" placeholder="image" ng-model="newProduct.images[0].src" required /><br/>
 	<input type="text" placeholder="Description" ng-model="newProduct.body_html" required /><br/>
 	<input type="text" placeholder="Vendor" ng-model="newProduct.vendor" required /><br/>
