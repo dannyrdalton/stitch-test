@@ -1,4 +1,6 @@
 app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$stateParams', '$timeout', '$location', function($scope, Shopify, $state, $stateParams, $timeout, $location) {
+
+	// Scope variables
 	$scope.products = [];
 	$scope.product = {};
 	$scope.variant = [];
