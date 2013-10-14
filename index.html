@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html ng-app="stitch" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Stitch Labs Test Application</title>
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+<body ng-controller="AppCtrl">
+	<div class="header-nav-container">
+		Route: &nbsp; {{currentRoute}}
+	</div>
+	<div class="container">
+		<div ui-view=""></div>
+	</div>
+</body>
+<script type="text/javascript" src="js/vendor/angular.js"></script>
+<script type="text/javascript" src="js/vendor/angular-cookies.js"></script>
+<script type="text/javascript" src="js/vendor/angular-ui-router.js"></script>
+<script type="text/javascript" src="js/app/main.js"></script>
+<script type="text/javascript" src="js/config/routes.js"></script>
+<script type="text/javascript" src="js/config/push-state.js"></script>
+<script type="text/javascript" src="js/config/utf8.js"></script>
+<script type="text/javascript" src="js/config/http-setup.js"></script>
+<script type="text/javascript" src="js/app/services/shopify_service.js"></script>
+<script type="text/javascript" src="js/app/controllers/app_controller.js"></script>
+<script type="text/javascript" src="js/app/controllers/product_list_controller.js"></script>
+</html>
