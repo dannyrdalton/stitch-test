@@ -1,4 +1,4 @@
-app.controller('ProductListCtrl', ['$scope', 'Shopify', function($scope, Shopify) {
+app.controller('ProductListCtrl', ['$scope', 'Shopify', '$state', function($scope, Shopify, $state) {
 	$scope.products = {};
 
 	var loadProducts = function() {
@@ -10,4 +10,8 @@ app.controller('ProductListCtrl', ['$scope', 'Shopify', function($scope, Shopify
 	};
 
 	loadProducts();
+
+	$scope.showProduct = function(product) {
+		Shopify.setCurrentProduct(product);
+	};
 }]);

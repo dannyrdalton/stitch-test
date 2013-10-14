@@ -422,3 +422,18 @@ table {
 	width: 100%;
 	padding-top: 44px;
 }
+
+.product-list-item a {
+	display: block;
+	height: 60px;
+	line-height: 60px;
+	background: rgb(230, 230, 230);
+	border-bottom: 1px solid rgb(180, 180, 180);
+	text-decoration:none;
+	color: black;
+}
+
+.product-list-item a:hover {
+	background: rgb(210, 210, 210);
+	cursor: pointer;
+}

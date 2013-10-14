@@ -9,8 +9,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			}
 		}
 	}).state('product show', {
-		url: '/:productName',
-		view: {
+		url: '/:productHandle',
+		views: {
 			"": {
 				controller: 'ProductShowCtrl',
 				templateUrl: '/views/partials/products/show.html'

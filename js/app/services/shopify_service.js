@@ -5,7 +5,16 @@ app.factory('Shopify', ['$rootScope', '$http', function($rootScope, $http) {
 		CORS_PROXY = 'http://www.crshman.info/cors-proxy.php?url=',
 		BASE_URL = CORS_PROXY + 'https://' + API_KEY + ':' + PASSWORD + '@dannys-stop.myshopify.com/admin';
 
+	var currentProduct = {};
+
 	return {
+		setCurrentProduct: function(product) {
+			currentProduct = product;
+			$rootScope.$broadcast('products');
+		},
+		getCurrentProduct: function() {
+			return currentProduct;
+		},
 		getProducts: function() {
 			var reqUrl = BASE_URL + '/products.json';
 			return $http.get(reqUrl);
