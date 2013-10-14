@@ -1,4 +1,4 @@
-app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$timeout', '$location', function($scope, Shopify, $state, $timeout, $location) {
+app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$stateParams', '$timeout', '$location', function($scope, Shopify, $state, $stateParams, $timeout, $location) {
 	$scope.products = [];
 	$scope.product = {};
 	$scope.variant = [];
@@ -31,15 +31,22 @@ app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$timeout', '$loc
 			Shopify.getProduct(product_id, function(err, product) {
 				$scope.product = product;
 				$scope.productLoading = false;
+				$scope.$emit('product:show', $scope.product);
 			});
 		} else {
 			$scope.productLoading = false;
+			$scope.$emit('product:show', $scope.product);
 		}
 	}
+
+	//Inital loading
 
 	loadProducts();
 
 	if ($location.path() !== '/') loadProduct();
+
+
+	//Scope functions
 
 	$scope.showProductList = function() {
 		$state.transitionTo('product list');
@@ -50,34 +57,39 @@ app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$timeout', '$loc
 		loadProduct();
 	};
 
-	$scope.createProduct = function() {
+	$scope.createProduct = function(form) {
+		form.$invalid = true;
 		var variants = [],
+			// holds option types
 			options = [],
-			optionsArray = [];
+			// holds arrays of option lists
+			optionLists = [];
 
 		if ($scope.newVariants.length > 0) {
 			$scope.newVariants.forEach(function(variant, vIndex) {
 				if (typeof variant.options === 'string') {
 					variant.options = variant.options.split(', ');
 				}
-				optionsArray.push(variant.options);
+				optionLists.push(variant.options);
 				options.push({
 					name: variant.optionName,
 					position: vIndex + 1
 				});
 			});
 
-			variants = combineArrays(optionsArray)
+			variants = combineArrays(optionLists)
 			$scope.newProduct.variants = variants;
 			$scope.newProduct.options = options;
 		}
 
 		$scope.creatingNewProduct = true;
 
-		Shopify.createProduct($scope.newProduct, function(err, res) {
+		Shopify.createProduct($scope.newProduct, function(err, product) {
+			console.log(product);
 			if (err) {
 				$scope.creatingNewProduct = false;
 			} else {
+				$scope.products.push(product);
 				$scope.newProduct = {
 					images: [{}]
 				};
@@ -99,17 +111,20 @@ app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$timeout', '$loc
 
 	$scope.removeVariantInput = function(index) {
 		$scope.newVariants.splice(index, 1);
-	}
+	};
 
-	$scope.$on('products:refresh', function() {
-		loadProducts();
-	});
+	$scope.isSelected = function(product) {
+		return $stateParams.productHandle == product.id;
+	};
+
+	//Event handlers
 
 	$scope.$on('variants:refresh', function(e, variant) {
 		var index = -1;
 		$scope.product.variants.forEach(function(v, vIndex) {
 			if (v.sku === variant.sku) index = vIndex;
 		});
+		$scope.product.variants[index] = variant;
 		$scope.product.variants[index].saved = true;
 		$timeout(function() {
 			$scope.product.variants[index].saved = false;
@@ -127,7 +142,7 @@ app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$timeout', '$loc
 	    }
 
 	    function getPermutation(n, arraysToCombine) {
-	       var result = {}, 
+	       var result = {},
 	           curArray;    
 	       for (var i = 0; i < arraysToCombine.length; i++) {
 	          curArray = arraysToCombine[i];
@@ -152,8 +167,8 @@ app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$timeout', '$loc
 	}
 
 	function isEmpty(obj) {
-	    for(var prop in obj) {
-	        if(obj.hasOwnProperty(prop))
+	    for (var prop in obj) {
+	        if (obj.hasOwnProperty(prop))
 	            return false;
 	    }
 

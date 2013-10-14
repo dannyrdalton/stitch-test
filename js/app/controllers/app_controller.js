@@ -12,9 +12,15 @@ app.controller('AppCtrl', ['$scope', '$state', function($scope, $state) {
 		if (toState.name === 'product list') {
 			$scope.showAddProductBtn = true;
 			$scope.currentRoute = '/'
+			$scope.currentRouteText = 'Home';
 		} else {
 			$scope.showAddProductBtn = false;
 			$scope.currentRoute = '/' + toParams.productHandle
 		}
+	});
+
+	$scope.$on('product:show', function(e, product) {
+		$scope.product = product;
+		$scope.currentRouteText = 'Home -> ' + product.title
 	});
 }]);

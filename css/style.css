@@ -426,6 +426,8 @@ table {
 
 img {
 	max-height: 90%;
+	max-width: 90%;
+	margin-left: 5%;
 	margin-top: 5%;
 }
 
@@ -509,7 +511,8 @@ img {
 	padding-left: 30px;
 }
 
-.product-list-item a:hover {
+.product-list-item a:hover,
+.product-list-item a.selected {
 	background: rgb(210, 210, 210);
 }
 
@@ -549,6 +552,8 @@ img {
 
 .product-info .name {
 	margin-top: 20px;
+	font-size: 1.3em;
+	font-weight: 700;
 }
 
 .product-close {
@@ -575,8 +580,12 @@ img {
 	overflow-y: scroll;
 	width: 90%;
 	margin: 0 auto;
-	margin-top: 20px;
 	border-top: 1px solid rgb(200, 200, 200);
+	border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+.variant-list:last-child {
+	border-bottom: none;
 }
 
 .variant-list-item {

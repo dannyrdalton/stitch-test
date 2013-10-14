@@ -35,7 +35,7 @@ app.factory('Shopify', ['$rootScope', '$http', function($rootScope, $http) {
 		},
 		getProduct: function(product_id, callback) {
 			var reqUrl = BASE_URL + '/products/' + product_id + '.json';
-			
+
 			$http.get(reqUrl)
 			.success(function(data) {
 				currentProduct = data.contents.product;
@@ -51,8 +51,7 @@ app.factory('Shopify', ['$rootScope', '$http', function($rootScope, $http) {
 				product: productToCreate
 			})
 			.success(function(data) {
-				$rootScope.$broadcast('products:refresh');
-				callback(null, data);
+				callback(null, data.contents.product);
 			});
 		},
 		updateVariant: function(variantToUpdate, callback) {

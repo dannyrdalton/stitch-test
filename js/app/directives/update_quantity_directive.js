@@ -5,7 +5,6 @@ app.directive('updateQuantity', ['$rootScope', '$http', 'Shopify', function($roo
 			$elem.on('focusout', function(e) {
 				Shopify.updateVariant($scope.variant, function(err, variant) {
 					$scope.variant = variant;
-					$rootScope.$broadcast('products:refresh');
 					$rootScope.$broadcast('variants:refresh', variant);
 				});
 			});
