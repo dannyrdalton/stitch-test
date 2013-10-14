@@ -1,3 +1,21 @@
-<div class="product-list-item" ng-repeat="product in products">
-	<a ng-href="/{{product.handle}}" ng-click="showProduct(product)">{{product.title}}</a>
+<form name="newProductForm" class="product-form" ng-submit="createProduct()" ng-show="showCreateProduct">
+	<input type="text" placeholder="Product Name" ng-model="newProduct.title" required /><span ng-show="creatingNewProduct">Creating...</span><br/>
+	<input type="text" placeholder="image" ng-model="newProduct.images[0].src" required /><br/>
+	<input type="text" placeholder="Description" ng-model="newProduct.body_html" required /><br/>
+	<input type="text" placeholder="Vendor" ng-model="newProduct.vendor" required /><br/>
+	<input type="text" placeholder="Product Type" ng-model="newProduct.product_type" required /><br/>
+	<input type="text" placeholder="SKU" ng-model="newProduct.sku" required /><br/>
+	<div ng-repeat="variant in newVariants">
+		<input type="text" placeholder="Variant Name"ng-model="variant.optionName" required />
+		<button ng-click="removeVariantInput($index)">Remove Variant Option</button> <br/>
+		<input type="text" placeholder="Options (comma separated)" ng-model="variant.options" required />
+	</div>
+	<button ng-click="addVariantInput()">Add Variant Option</button><br/>
+	<input type="submit" value="Create Product" ng-disabled="newProductForm.$invalid" /><br/>
+</form>
+<div class="loading" ng-show="productsLoading">Loading...</div>
+<div class="product-list-item" ng-repeat="product in products" ng-hide="productsLoading">
+	<a ng-href="/#!/{{product.id}}" ng-click="showProduct(product)">
+		{{product.title}}
+	</a>
 </div>

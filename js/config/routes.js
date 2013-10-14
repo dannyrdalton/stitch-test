@@ -4,7 +4,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		url: '/',
 		views: {
 			"": {
-				controller: 'ProductListCtrl',
 				templateUrl: '/views/partials/products/list.html'
 			}
 		}
@@ -12,7 +11,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		url: '/:productHandle',
 		views: {
 			"": {
-				controller: 'ProductShowCtrl',
 				templateUrl: '/views/partials/products/show.html'
 			}
 		}

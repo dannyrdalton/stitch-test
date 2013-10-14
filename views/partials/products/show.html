@@ -1,1 +1,30 @@
-SHOW ME DA MONEY {{product.title}}
+<div class="side-product-list" fill-height>
+	<div class="loading" ng-show="productsLoading">Loading...</div>
+	<div class="product-list-item" ng-repeat="product in products" ng-hide="productsLoading">
+		<a ng-href="/{{product.handle}}" ng-click="showProduct(product)">{{product.title}}</a>
+	</div>
+</div>
+<div class="loading" ng-show="productLoading">Loading...</div>
+<div class="product-container" ng-hide="productLoading">
+	<div class="row">
+		<div class="product-image">
+			<img ng-src="{{product.image.src}}">
+		</div>
+		<div class="product-info">
+			<div class="name">{{product.title}}</div>
+			<div class="body">{{product.body_html}}</div>
+			<div class="tags">{{product.tags}}</div>
+			<div class="link"><a ng-href="{{product.store_url}}" target="_blank">View Product in Store</a></div>
+		</div>
+		<div class="product-close">
+			<div class="close-btn" ng-click="showProductList()">Back</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="variant-list" fill-height>
+			<div class="variant-list-item" ng-repeat="variant in product.variants">
+				{{variant.title}} || SKU: {{variant.sku}} || Inventory Quantity: <input ng-show="variant.inventory_management" type="text" ng-model="variant.inventory_quantity" update-quantity ng-click="selectVariant(variant, $index)" /> <span ng-hide="variant.inventory_management">No Inventory Management.</span> || <span class="msg-success" ng-show="variant.saved">Saved successfully</span>
+			</div>
+		</div>
+	</div>
+</div>

@@ -9,11 +9,13 @@
 <body ng-controller="AppCtrl">
 	<div class="header-nav-container">
 		Route: &nbsp; {{currentRoute}}
+		<div class="add-product-btn" ng-show="showAddProductBtn" ng-click="toggleCreateProduct()">Add Product</div>
 	</div>
 	<div class="container">
-		<div ui-view=""></div>
+		<div class="row" ng-controller="ProductsCtrl" ui-view=""></div>
 	</div>
 </body>
+<script type="text/javascript" src="js/vendor/jquery.js"></script>
 <script type="text/javascript" src="js/vendor/angular.js"></script>
 <script type="text/javascript" src="js/vendor/angular-cookies.js"></script>
 <script type="text/javascript" src="js/vendor/angular-ui-router.js"></script>
@@ -23,7 +25,8 @@
 <script type="text/javascript" src="js/config/utf8.js"></script>
 <script type="text/javascript" src="js/config/http-setup.js"></script>
 <script type="text/javascript" src="js/app/services/shopify_service.js"></script>
+<script type="text/javascript" src="js/app/directives/fill_height_directive.js"></script>
+<script type="text/javascript" src="js/app/directives/update_quantity_directive.js"></script>
 <script type="text/javascript" src="js/app/controllers/app_controller.js"></script>
 <script type="text/javascript" src="js/app/controllers/product_list_controller.js"></script>
-<script type="text/javascript" src="js/app/controllers/product_show_controller.js"></script>
 </html>
