@@ -15,8 +15,6 @@ app.factory('Shopify', ['$rootScope', '$http', function($rootScope, $http) {
 		},
 		setCurrentProduct: function(product) {
 			currentProduct = product;
-			currentProduct.store_url = STORE_URL + '/products/' + currentProduct.handle;
-			$rootScope.$broadcast('products');
 		},
 		getCurrentProduct: function() {
 			return currentProduct;

@@ -1,4 +1,4 @@
 app.config(function($locationProvider) {
-  $locationProvider.html5Mode(false);
-   $locationProvider.hashPrefix('!');
+	$locationProvider.html5Mode(false);
+	$locationProvider.hashPrefix('!');
 });

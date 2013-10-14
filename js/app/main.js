@@ -1,1 +1,1 @@
-var app = angular.module('stitch', ['ngCookies', 'ui.router']);
+var app = angular.module('stitch', ['ui.router']);
