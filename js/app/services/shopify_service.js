@@ -44,11 +44,11 @@ app.factory('Shopify', ['$rootScope', '$http', function($rootScope, $http) {
 			var reqUrl = BASE_URL + '/products.json',
 				variantsToCreate = [];
 
-			
 			$http.post(reqUrl, {
 				product: productToCreate
 			})
 			.success(function(data) {
+				$rootScope.$broadcast('products:refresh');
 				callback(null, data.contents.product);
 			});
 		},

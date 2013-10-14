@@ -87,11 +87,9 @@ app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$stateParams', '
 		$scope.creatingNewProduct = true;
 
 		Shopify.createProduct($scope.newProduct, function(err, product) {
-			console.log(product);
 			if (err) {
 				$scope.creatingNewProduct = false;
 			} else {
-				$scope.products.push(product);
 				$scope.newProduct = {
 					images: [{}]
 				};
@@ -120,6 +118,10 @@ app.controller('ProductsCtrl', ['$scope', 'Shopify', '$state', '$stateParams', '
 	};
 
 	//Event handlers
+
+	$scope.$on('products:refresh', function() {
+		loadProducts();
+	});
 
 	$scope.$on('variants:refresh', function(e, variant) {
 		var index = -1;
